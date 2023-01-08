@@ -1,7 +1,9 @@
 Link to the problem: https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
 
-You are given an array of integers nums and an integer target.
-Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element on it is less or equal to target. Since the answer may be too large, return it modulo 10^9 + 7.
+/*
+    You are given an array of integers nums and an integer target.
+    Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element on it is less or equal to target. Since the answer may be too large, return it modulo 10^9 + 7.
+*/
 
 Solution:
 
@@ -28,7 +30,9 @@ public:
     }
 };
 
-TC: O(NlogN)
-SC: O(N) for storing the powers in cpp
-Inspired by: https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/solutions/709227/java-c-python-two-sum/
-Notes: This can be solved as a regular susbequences backtracking porblem as well with a TC well over O(2^N)
+/*
+    TC: O(NlogN)
+    SC: O(N) for storing the powers in cpp
+    Inspired by: https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/solutions/709227/java-c-python-two-sum/
+    Notes: This can be solved as a regular susbequences backtracking porblem as well with a TC well over O(2^N)
+*/    
