@@ -3,24 +3,43 @@
   * Link: https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/
 */
 
+class StackPair {
+private:
+    char c;
+    int count;
+public:
+    StackPair(char _c, int _count) {
+        c = _c;
+        count = _count;
+    }
+    void incrementCount() {
+        this->count++;
+    }
+    char getChar() {
+        return this->c;
+    }
+    int getCount() {
+        return this->count;
+    }
+};
 class Solution {
 public:
     string removeDuplicates(string s, int k) {
         if(s.size() < k) return s;
-        stack<pair<char, int>> stack;
+        stack<StackPair*> stack;
         for(char c: s) {
-            if(stack.empty() || stack.top().first != c) {
-                stack.push({c, 1});
+            if(stack.empty() || stack.top()->getChar() != c) {
+                stack.push(new StackPair(c, 1));
             }
             else {
-                if(stack.top().second + 1 == k) stack.pop();
-                else stack.top().second++;
+                if(stack.top()->getCount() + 1 == k) stack.pop();
+                else stack.top()->incrementCount();
             }
         }
         string res = "";
         while(!stack.empty()) {
-            char c = stack.top().first;
-            int freq = stack.top().second;
+            char c = stack.top()->getChar();
+            int freq = stack.top()->getCount();
             stack.pop();
             while(freq--) res += c;
         }
