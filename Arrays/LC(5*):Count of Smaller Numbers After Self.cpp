@@ -3,7 +3,7 @@
 * Link: https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/
 */
 
-//Approach 1: BST. TC: O(N^2), worst case BST gets skewed to the either side
+//Approach 1: BST. TC: O(N^2), in the worst case BST gets skewed to the either side
 
 class BST {
 private:
