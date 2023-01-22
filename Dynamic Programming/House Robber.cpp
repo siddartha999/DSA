@@ -1,5 +1,6 @@
 /**
 * Link: https://leetcode.com/problems/house-robber/description/
+* Explanation: https://www.youtube.com/watch?v=GrMBfJNk_NY&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=6
 */
 
 //Step 1: TC: O(2^N), SC: O(1)
