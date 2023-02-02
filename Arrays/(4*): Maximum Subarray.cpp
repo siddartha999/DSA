@@ -21,7 +21,25 @@ public:
     }
 };
 
-// Approach 2: Going Negative is a deal-breaker. TC: O(N), SC: O(1)
+
+// Approach 2: The DP way: TC: O(N), SC: O(N). 
+// Inspired by: https://leetcode.com/problems/maximum-subarray/solutions/20193/dp-solution-some-thoughts/?orderBy=most_votes
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSum = INT_MIN;
+        vector<int> dp(nums.size() + 1, 0);
+        for(int i = 0; i < nums.size(); i++) {
+            dp[i + 1] = (dp[i] < 0 ? 0 : dp[i]) + nums[i]; //If til prev subaryay is negative, the current should be a standalone subarray
+            maxSum = max(maxSum, dp[i + 1]);
+        }
+        return maxSum;
+    }
+};
+
+
+// Approach 3: Going Negative is a deal-breaker. TC: O(N), SC: O(1)
 
 class Solution {
 public:
