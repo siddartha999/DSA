@@ -24,8 +24,10 @@ private:
 
 // Approach 2 KMP => TC: O(M + N), SC: O(M + N)
 // The crucial part is the serialize(). Separating out subtrees properly is the central piece of this problem
+// Without including NULLs none of the traversals(Pre, In, Post) & their combination would produce a unique sequence
 // Preorder makes sense for serialize(), as for KMP it should be intuivite to trace a string from (left to right) :=> a tree from (root -> left ->right)
-
+// Inorder would not produce a unique sequence even when NULLs are included
+// Post order would produce as it is a reverse of pre-order, but intuitively, for this problem, does not make sense
 class Solution {
 public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
