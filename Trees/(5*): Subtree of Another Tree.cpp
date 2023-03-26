@@ -24,6 +24,7 @@ private:
 
 // Approach 2 KMP => TC: O(M + N), SC: O(M + N)
 // The crucial part is the serialize(). Separating out subtrees properly is the central piece of this problem
+// Preorder makes sense for serialize(), as for KMP it should be intuivite to trace a string from (left to right) :=> a tree from (root -> left ->right)
 
 class Solution {
 public:
