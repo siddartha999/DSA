@@ -28,6 +28,7 @@ private:
 // Preorder makes sense for serialize(), as for KMP it should be intuivite to trace a string from (left to right) :=> a tree from (root -> left ->right)
 // Inorder would not produce a unique sequence even when NULLs are included
 // Post order would produce as it is a reverse of pre-order, but intuitively, for this problem, does not make sense
+// Ref: https://stackoverflow.com/questions/45871284/uniqueness-of-inorder-preorder-and-postorder-traversal-with-null-elements
 class Solution {
 public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
