@@ -34,59 +34,52 @@ public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         if(!subRoot) return true;
         if(!root) return false;
-        string rootPreorder = "";
-        serialize(root, rootPreorder);
-        string subRootPreorder = "";
-        serialize(subRoot, subRootPreorder);
-        return kmp(rootPreorder, subRootPreorder);
+        string rootPreOrder = serialize(root);
+        string subRootPreOrder = serialize(subRoot);
+        return kmp(rootPreOrder, subRootPreOrder);
     }
-
 private:
-    void serialize(TreeNode* root, string& str) {
-        if(!root) {
-            str += "#";
-            return;
-        }
-        str += "<"; //Indicates the beginning of a root
+    string serialize(TreeNode* root) {
+        if(!root) return "#";
+        string str = "<"; //Indicates the beginning of a root
         str += to_string(root->val);
-        serialize(root->left, str);
-        serialize(root->right, str);
+        str += serialize(root->left);
+        str += serialize(root->right);
         str += ">"; //Indicates the end of a root
+        return str;
     }
 
-private:
     bool kmp(string haystack, string needle) {
-        vector<int> lps = populateBoundary(needle);
-        int idx = 0;
+        vector<int> lb = calculateBoundary(needle);
+        int needleIdx = 0;
         for(int i = 0; i < haystack.size(); i++) {
-            if(haystack[i] == needle[idx]) idx++;
+            if(haystack[i] == needle[needleIdx]) needleIdx++;
             else {
-                while(idx > 0) {
-                    idx = lps[idx - 1];
-                    if(haystack[i] == needle[idx]) {
-                        idx++;
+                while(needleIdx > 0) {
+                    needleIdx = lb[needleIdx - 1];
+                    if(needle[needleIdx] == haystack[i]) {
+                        needleIdx++;
                         break;
                     }
                 }
             }
-            if(idx >= needle.size()) return true;
+            if(needleIdx >= needle.size()) return true;
         }
         return false;
     }
-
-private:
-    vector<int> populateBoundary(string needle) {
-        vector<int> lps(needle.size(), 0);
-        int prev = 0, idx = 1;
+    
+    vector<int> calculateBoundary(string needle) {
+        vector<int> lb(needle.size(), 0);
+        int idx = 1; int prev = 0;
         while(idx < needle.size()) {
             if(needle[idx] == needle[prev]) {
-                lps[idx++] = ++prev;
+                lb[idx++] = ++prev;
             }
             else {
-                if(prev > 0) prev = lps[prev - 1];
+                if(prev > 0) prev = lb[prev - 1];
                 else idx++;
             }
         }
-        return lps;
+        return lb;
     }
 };
