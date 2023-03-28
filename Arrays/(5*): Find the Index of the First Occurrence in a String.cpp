@@ -26,7 +26,8 @@ public:
 
 
 
-// Approach 2: KMP: Visualize it!;  TC: O(M), Pre-processing: O(N).  N: size(needle), M: size(haystack);
+// Approach 2: KMP: Visualize it!;  TC: O(M), Pre-processing: O(N), SC: O(N).  
+// N: size(needle), M: size(haystack);
 // Visualize with haystack: "mememes" & needle: "memes". The goal of KMP is to avoid the redundant work
 
 class Solution {
