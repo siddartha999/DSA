@@ -3,7 +3,9 @@
 * Brilliant Iterative solution Viz: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/solutions/1347857/c-java-python-iterate-in-bst-picture-explain-time-o-h-space-o-1/?orderBy=most_votes
 */
 
-// Approach 1: Recursive, TC: O(H), SC: O(H)
+// O(N) for BST in the worst case i.e left or right skewed trees
+
+// Approach 1: Recursive, TC: O(N), SC: O(N)
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
@@ -22,7 +24,7 @@ public:
 };
 
 
-// Approach 2: Iterative, TC: O(H), SC: O(1)
+// Approach 2: Iterative, TC: O(N), SC: O(1)
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
