@@ -4,7 +4,6 @@
 */
 
 // Approach 1: Recursive, TC: O(H), SC: O(H)
-
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
