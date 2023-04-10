@@ -9,17 +9,17 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root) return NULL;
-        if(root->val == p->val || root->val == q->val) return root; // Case 1
-        TreeNode* leftTraversal = lowestCommonAncestor(root->left, p, q);
-        TreeNode* rightTraversal = lowestCommonAncestor(root->right, p, q);
-        if(leftTraversal && rightTraversal) { // Case 2
+        if(!root) return root;
+        int minVal = min(p->val, q->val);
+        int maxVal = max(p->val, q->val);
+        if(root->val >= minVal && root->val <= maxVal) { // CASE 1
             return root;
         }
-        if(leftTraversal || rightTraversal) { // Case 3
-            return leftTraversal != NULL ? leftTraversal : rightTraversal;
+        if(root->val > p->val && root->val > q->val) { // CASE 2
+            return lowestCommonAncestor(root->left, p, q);
         }
-        return NULL;
+        //CASE 3
+        return lowestCommonAncestor(root->right, p, q);
     }
 };
 
