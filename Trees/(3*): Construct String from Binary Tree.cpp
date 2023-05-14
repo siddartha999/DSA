@@ -30,15 +30,15 @@ public:
         helper(root, res);
         return res;
     }
-
 private:
     void helper(TreeNode* root, string& res) {
+        if(!root) return;
         res += to_string(root->val);
-        if(!root->left && !root->right) return;
-        res += "(";
-        if(root->left) {
-            helper(root->left, res);
+        if(!root->left && !root->right) {
+            return;
         }
+        res += "(";
+        helper(root->left, res);
         res += ")";
         if(root->right) {
             res += "(";
