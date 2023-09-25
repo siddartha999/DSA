@@ -1,5 +1,5 @@
 /**
-* Problem Link: https://www.codingninjas.com/studio/problems/longest-common-substring_123520
+* Problem Link: https://www.codingninjas.com/studio/problems/longest-common-substring_1235207
 * Reference: https://www.youtube.com/watch?v=_wP9mWNPL5w&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=28
 **/
 
@@ -38,6 +38,29 @@ int lcs(string &str1, string &str2){
             }
         }
         cache = temp;
+    }
+    return maxVal;
+}
+
+
+
+
+
+
+// Approach 3: Tabulated with Space Optimized with 1 Array. TC: O(N * M), SC: O(N)
+int lcs(string &str1, string &str2){
+    vector<int> cache(str2.size() + 1, 0);
+    int maxVal = 0;
+    for(int i = str1.size() - 1; i >= 0; i--) {
+        for(int j = 0; j <= str2.size() - 1; j++) {
+            if(str1[i] == str2[j]) {
+                cache[j] = 1 + cache[j + 1];
+                maxVal = max(maxVal, cache[j]);
+            }
+            else {
+                cache[j] = 0;
+            }
+        }
     }
     return maxVal;
 }
