@@ -93,7 +93,7 @@ int maxProfit(vector<int>& prices)
 
 
 
-// Approach 4: Tabulated with Space Optimized. TC: O(N * 2 * 3), SC: O(1)
+// Approach 4: Tabulated with Space Optimized 2D. TC: O(N * 2 * 3), SC: O(1)
 int maxProfit(vector<int>& prices)
 {
     vector<vector<int>> cache(2, vector<int> (3, 0));
@@ -117,4 +117,31 @@ int maxProfit(vector<int>& prices)
     }
 
     return cache[0][2];
+}
+
+
+
+
+// Approach 5: Tabulated with Space Optimized 1D. TC: O(N * 4), SC: O(1)
+int maxProfit(vector<int>& prices)
+{
+    vector<int> cache (5, 0);
+
+    for(int idx = prices.size() - 1; idx >= 0; idx--) {
+        vector<int> temp = cache;
+        for(int j = 0; j <= 3; j++) {
+            int res = 0;
+            if(j % 2 == 0) {
+                res = (-1 * prices[idx]) + cache[j + 1];
+            }
+            else {
+                res = prices[idx] + cache[j + 1];
+            }
+            int pass = cache[j];
+            temp[j] = max(res, pass);
+        }
+        cache = temp;
+    }
+
+    return cache[0];
 }
