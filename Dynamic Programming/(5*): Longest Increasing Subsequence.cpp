@@ -48,3 +48,29 @@ private:
         return cache[idx][prevIdx];
     }
 };
+
+
+
+
+
+
+// Approach 3: Tabulated. TC: O(N * N), SC: O(N * N)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<vector<int>> cache(nums.size() + 2, vector<int> (nums.size() + 2, 0));
+         
+        for(int idx = nums.size(); idx > 0; idx--) {
+            for(int prevIdx = 0; prevIdx < idx; prevIdx++) {
+                int pass = cache[idx + 1][prevIdx];
+                int include = 0;
+                if(prevIdx == 0 || nums[prevIdx - 1] < nums[idx - 1]) {
+                    include = 1 + cache[idx + 1][idx];
+                }
+                cache[idx][prevIdx] = max(pass, include);
+            }
+        }
+
+        return cache[1][0];
+    }
+};
