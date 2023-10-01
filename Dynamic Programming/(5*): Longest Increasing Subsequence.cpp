@@ -74,3 +74,30 @@ public:
         return cache[1][0];
     }
 };
+
+
+
+
+
+// Approach 4: Tabulated with Space Optimized 2D. TC: O(N * N), SC: O(N * 2)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> cache(nums.size() + 2, 0);
+         
+        for(int idx = nums.size(); idx > 0; idx--) {
+            vector<int> temp = cache;
+            for(int prevIdx = 0; prevIdx < idx; prevIdx++) {
+                int pass = cache[prevIdx];
+                int include = 0;
+                if(prevIdx == 0 || nums[prevIdx - 1] < nums[idx - 1]) {
+                    include = 1 + cache[idx];
+                }
+                temp[prevIdx] = max(pass, include);
+            }
+            cache = temp;
+        }
+
+        return cache[0];
+    }
+};
