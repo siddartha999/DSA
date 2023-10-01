@@ -22,3 +22,29 @@ private:
         return max(pass, include);
     }
 };
+
+
+
+// Approach 2: Memoized. TC: O(N * N), SC: O(N * N) + O(N)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<vector<int>> cache(nums.size() + 1, vector<int> (nums.size() + 2, -1));
+        return helper(nums, 1, 0, cache);
+    }
+private:
+    int helper(vector<int>& nums, int idx, int prevIdx, vector<vector<int>>& cache) {
+        if(idx > nums.size()) return 0;
+
+        if(cache[idx][prevIdx] != -1) return cache[idx][prevIdx];
+
+        int pass = helper(nums, idx + 1, prevIdx, cache);
+        int include = 0;
+        if(prevIdx == 0 || nums[prevIdx - 1] < nums[idx - 1]) {
+            include = 1 + helper(nums, idx + 1, idx, cache);
+        }
+
+        cache[idx][prevIdx] = max(pass, include);
+        return cache[idx][prevIdx];
+    }
+};
