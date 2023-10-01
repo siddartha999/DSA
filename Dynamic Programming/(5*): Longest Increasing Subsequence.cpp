@@ -127,3 +127,42 @@ public:
         return cache[0];
     }
 };
+
+
+
+
+// Approach 6: Greedy (Does not give the exact LIS though). TC: O(NlogN), SC: O(N)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> cache;
+        for(int num: nums) {
+            if(cache.size() == 0 || cache[cache.size() - 1] < num) {
+                cache.push_back(num);
+            }
+            else {
+                int nextGreaterIdx = helper(cache, num);
+                cache[nextGreaterIdx] = num;
+            }
+        }
+
+        return cache.size();
+    }
+private:
+    int helper(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        while(left <= right) {
+            int mid = left + (right - left) / 2;
+            if(nums[mid] == target) {
+                return mid;
+            }
+            else if(nums[mid] > target) {
+                right = mid - 1;
+            }
+            else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+};
