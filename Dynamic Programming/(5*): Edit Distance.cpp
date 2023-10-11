@@ -98,7 +98,7 @@ int editDistance(string str1, string str2)
 
     for(int i = str1.size() - 1; i >= 0; i--) {
         vector<int> temp = cache;
-        temp[str2.size()] = str1.size() - i; // Work with adcc, dc to visualize
+        temp[str2.size()] = str1.size() - i; // Visualize the matrix!
         for(int j = str2.size() - 1; j >= 0; j--) {
             if(str1[i] == str2[j]) {
                 temp[j] = cache[j + 1];
