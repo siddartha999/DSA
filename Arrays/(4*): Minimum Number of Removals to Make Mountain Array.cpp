@@ -21,6 +21,7 @@ public:
             }
         }
 
+        //View the max.peak w.r.t the peaks(has both lis and lds) of the array
         int minRemovals = nums.size();
         for(int i = 0; i < nums.size(); i++) {
             if(lis[i] == 1 || lds[i] == 1) continue;
