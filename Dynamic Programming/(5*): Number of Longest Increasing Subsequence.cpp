@@ -9,25 +9,28 @@ public:
         vector<int> lis(nums.size(), 1);
         vector<int> count(nums.size(), 1);
 
-        int maxLISLength = 1, maxCount = 1;
-
         for(int i = 1; i < nums.size(); i++) {
             for(int j = 0; j < i; j++) {
                 if(nums[i] > nums[j]) {
-                    if(1 + lis[j] > lis[i]) {
-                        lis[i] = 1 + lis[j];
+                    if(lis[j] + 1 > lis[i]) {
+                        lis[i] = lis[j] + 1;
                         count[i] = count[j];
                     }
-                    else if(1 + lis[j] == lis[i]) {
+                    else if(lis[i] == lis[j] + 1) {
+                        lis[i] = lis[j] + 1;
                         count[i] += count[j];
                     }
                 }
             }
-            if(lis[i] > maxLISLength) {
-                maxLISLength = lis[i];
+        }
+
+        int maxLis = 1, maxCount = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(lis[i] > maxLis) {
+                maxLis = lis[i];
                 maxCount = count[i];
             }
-            else if(lis[i] == maxLISLength) {
+            else if(lis[i] == maxLis) {
                 maxCount += count[i];
             }
         }
