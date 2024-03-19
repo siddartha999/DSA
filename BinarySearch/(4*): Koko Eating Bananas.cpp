@@ -1,6 +1,7 @@
 /**
 * https://leetcode.com/problems/koko-eating-bananas/description/
 * Reference: https://www.youtube.com/watch?v=qyfekrNni90&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=13
+* Useful Reference: https://leetcode.com/problems/koko-eating-bananas/solutions/769702/python-clear-explanation-powerful-ultimate-binary-search-template-solved-many-problems/
 **/
 
 // TC: O(N) * O(log(maxElement))
