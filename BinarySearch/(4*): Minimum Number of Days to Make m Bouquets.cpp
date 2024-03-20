@@ -9,19 +9,14 @@ public:
         long long requiredFlowers = (long long)m * k;
         if(requiredFlowers > nums.size()) return -1;
 
-        //Sort and list the unique days
-        set<int> sortedSet;
-        for(int num: nums) sortedSet.insert(num);
-        vector<int> sortedList;
-        for(auto it = sortedSet.begin(); it != sortedSet.end(); it++) {
-            sortedList.push_back(*it);
+        int left = INT_MAX, right = INT_MIN;
+        for(int num: nums) {
+            left = min(left, num);
+            right = max(right, num);
         }
-
-        int left = 0, right = sortedList.size() - 1;
         int res = INT_MAX;
         while(left <= right) {
-            int mid = left + (right - left) / 2;
-            int day = sortedList[mid];
+            int day = left + (right - left) / 2;
             int bouquetCount = 0;
             int currentCount = 0;
             for(int num: nums) {
@@ -42,10 +37,10 @@ public:
             }
 
             if(bouquetCount == m) { //Success
-                right = mid - 1;
+                right = day - 1;
             }
             else { //Failure
-                left = mid + 1;
+                left = day + 1;
             }
         }
         return res == INT_MAX ? -1 : res;
