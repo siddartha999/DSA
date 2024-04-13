@@ -3,7 +3,7 @@
 * Reference: https://www.youtube.com/watch?v=R_Mfw4ew-Vo&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=20
 **/
 
-//Appraoch 1: Brute Force. TC: O(maxDiff * n), SC: O(1).
+//Appraoch 1: Brute Force. TC: O(nlogn) + O(maxDiff * n), SC: O(1).
 class Solution {
 public:
     int maxDistance(vector<int>& position, int m) {
@@ -37,7 +37,7 @@ private:
 
 
 
-// Approach 2: Binary Search. TC: O(n * log(maxDiff)), SC: O(1).
+// Approach 2: Binary Search. TC: O(nlogn) + O(n * log(maxDiff)), SC: O(1).
 class Solution {
 public:
     int maxDistance(vector<int>& position, int m) {
