@@ -117,5 +117,43 @@ class Solution{
 
 
 
-// Approach 3: Binary Search
+// Approach 3: Binary Search. TC: O(min(log(n), log(m))), SC: O(1)
+class Solution{
+    public:
+    double MedianOfArrays(vector<int>& nums1, vector<int>& nums2)
+    {
+        if(nums1.size() > nums2.size()) {
+            return MedianOfArrays(nums2, nums1);
+        }
+        
+        int left = 0, right = nums1.size();
+        int leftBucketSize = (nums1.size() + nums2.size()) / 2;
+        
+        while(left <= right) {
+            int mid = left + (right - left) / 2;
+            int leftOneIdx = mid - 1;
+            int leftTwoIdx = leftBucketSize - mid - 1;
+            int leftOneVal = (leftOneIdx == -1) ? INT_MIN : nums1[leftOneIdx];
+            int leftTwoVal = (leftTwoIdx == -1) ? INT_MIN : nums2[leftTwoIdx];
+            int rightOneVal = (leftOneIdx + 1 >= nums1.size()) ? INT_MAX : nums1[leftOneIdx + 1];
+            int rightTwoVal = (leftTwoIdx + 1 >= nums2.size()) ? INT_MAX : nums2[leftTwoIdx + 1];
+            
+            if(leftOneVal <= rightTwoVal && leftTwoVal <= rightOneVal) {
+                if( (nums1.size() + nums2.size()) % 2 == 0) { //EVEN
+                    return (double)(max(leftOneVal, leftTwoVal) + min(rightOneVal, rightTwoVal)) / 2;
+                }
+                else { //ODD
+                    return min(rightOneVal, rightTwoVal);
+                }
+            }
+            else if(leftOneVal > rightTwoVal) {
+                right = mid - 1;
+            }
+            else {
+                left = mid + 1;
+            }
+        }
+        
+    }
+};
 
