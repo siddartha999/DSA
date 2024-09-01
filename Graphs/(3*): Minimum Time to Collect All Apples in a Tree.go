@@ -2,7 +2,7 @@
 * Problem link: https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/description/
 **/
 
-// Approach 1: with a visited set. TC: O(N), SC: O(N)
+// Approach 1: with a visited set. TC: O(N * N matrix), SC: O(N)
 func minTime(n int, edges [][]int, hasApple []bool) int {
 	if n == 1 {
 		return 0
