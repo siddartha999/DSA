@@ -2,7 +2,7 @@
 * Problem link: https://leetcode.com/problems/number-of-provinces/description/
 **/
 
-// Approach 1: BFS. TC: O(N), SC: O(N)
+// Approach 1: BFS. TC: O(N * N matrix), SC: O(N)
 func findCircleNum(isConnected [][]int) int {
 	provinceCount := 0
 	visited := []int{}
