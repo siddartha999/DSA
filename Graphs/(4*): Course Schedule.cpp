@@ -2,7 +2,7 @@
 * Problem link: https://leetcode.com/problems/course-schedule/description/
 **/
 
-// DFS: TC: O(V + E), SC: O(V + E)
+// Approach 1: DFS => TC: O(V + E), SC: O(V + E)
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
@@ -32,5 +32,46 @@ private:
         }
         path.erase(vertex);
         return true;
+    }
+};
+
+
+
+
+
+
+
+
+// Approach 2: BFS. TC: O(V + E), SC: O(V + E)
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
+        for(int row = 0; row < prerequisites.size(); row++) {
+            indegree[prerequisites[row][1]]++;
+            adj[prerequisites[row][0]].push_back(prerequisites[row][1]);
+        }
+
+        queue<int> qq;
+        for(int vertex = 0; vertex < numCourses; vertex++) {
+            if(indegree[vertex] == 0) qq.push(vertex);
+        }
+
+        int verticesProcessed = 0;
+        while(qq.size() > 0) {
+            int vertex = qq.front();
+            qq.pop();
+            verticesProcessed++;
+            for(int idx = 0; idx < adj[vertex].size(); idx++) {
+                int adjacentVertex = adj[vertex][idx];
+                indegree[adjacentVertex]--;
+                if(indegree[adjacentVertex] == 0) {
+                    qq.push(adjacentVertex);
+                }
+            }
+        }
+        
+        return verticesProcessed == numCourses ? true : false;
     }
 };
