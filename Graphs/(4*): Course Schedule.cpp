@@ -43,6 +43,7 @@ private:
 
 
 // Approach 2: BFS. TC: O(V + E), SC: O(V + E)
+// Notes: Processing vertices with zero indegree nodes makes the visualization easier.
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
