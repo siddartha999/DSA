@@ -2,7 +2,7 @@
 Problem link: https://leetcode.com/problems/course-schedule-ii/description/
 **/
 
-//DFS. TC: O(V + E), SC: O(V + E)
+//Approach 1: DFS. TC: O(V + E), SC: O(V + E)
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
@@ -39,42 +39,39 @@ private:
 
 
 
-//BFS. TC: O(V + E), SC: O(V + E)
+//Approach 2: BFS. TC: O(V + E), SC: O(V + E)
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> res;
-        vector<int> inorder(numCourses, 0);
         vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
         for(int row = 0; row < prerequisites.size(); row++) {
-            inorder[prerequisites[row][1]]++;
             adj[prerequisites[row][0]].push_back(prerequisites[row][1]);
+            indegree[prerequisites[row][1]]++;
         }
 
-        queue<int> qq;
+        queue<int> bfs;
         for(int vertex = 0; vertex < numCourses; vertex++) {
-            if(inorder[vertex] == 0) qq.push(vertex);
+            if(indegree[vertex] == 0) bfs.push(vertex);
         }
 
-        int verticesProcessed = numCourses;
-        while(qq.size() > 0) {
-            int vertex = qq.front();
-            qq.pop();
-            verticesProcessed--;
+        vector<int> order;
+        int verticesProcessed = 0;
+        while(bfs.size() > 0) {
+            int vertex = bfs.front();
+            bfs.pop();
+            order.push_back(vertex);
+            verticesProcessed++;
             for(int idx = 0; idx < adj[vertex].size(); idx++) {
                 int adjacentVertex = adj[vertex][idx];
-                inorder[adjacentVertex]--;
-                if(inorder[adjacentVertex] == 0) {
-                    qq.push(adjacentVertex);
-                }
+                indegree[adjacentVertex]--;
+                if(indegree[adjacentVertex] == 0) bfs.push(adjacentVertex);
             }
-            res.push_back(vertex);
         }
 
-        if(verticesProcessed != 0) {
-            return {};
-        }
-        reverse(res.begin(), res.end());
-        return res;
+        if(verticesProcessed != numCourses) return {};
+
+        reverse(order.begin(), order.end());
+        return order;
     }
 };
