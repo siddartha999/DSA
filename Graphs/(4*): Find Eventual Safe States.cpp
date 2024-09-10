@@ -2,7 +2,7 @@
 * Problem link: https://leetcode.com/problems/find-eventual-safe-states/description/
 **/
 
-// Approach 1: DFS with current traversal path.
+// Approach 1: DFS with current traversal path. TC: O(V+ E), SC: O(V + E)
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
@@ -57,7 +57,7 @@ private:
 
 
 
-// Approach 2: DFS without current traversal path.
+// Approach 2: DFS without current traversal path. TC: O(V+ E), SC: O(V + E)
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
