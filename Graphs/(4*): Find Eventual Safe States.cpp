@@ -96,3 +96,50 @@ private:
         return true;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+// Approach 3: BFS. TC: O(V + E), SC: O(V + E). A similiarish BFS approach to CourseSchedule problems
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int> safeNodes;
+        vector<vector<int>> incomingVertices(graph.size());
+        queue<int> bfs;
+        vector<int> outdegree(graph.size(), 0);
+        for(int vertex = 0; vertex < graph.size(); vertex++) {
+            if(graph[vertex].size() == 0) {
+                bfs.push(vertex);
+                continue;
+            }
+            outdegree[vertex] = graph[vertex].size();
+            for(int outgoingEdge = 0; outgoingEdge < graph[vertex].size(); outgoingEdge++) {
+                int receiverVertex = graph[vertex][outgoingEdge];
+                incomingVertices[receiverVertex].push_back(vertex);
+            }
+        }
+
+        vector<int> res;
+        while(bfs.size() > 0) {
+            int vertex = bfs.front();
+            bfs.pop();
+            res.push_back(vertex);
+            for(int incomingEdge = 0; incomingEdge < incomingVertices[vertex].size(); incomingEdge++) {
+                int incomingVertex = incomingVertices[vertex][incomingEdge];
+                outdegree[incomingVertex]--;
+                if(outdegree[incomingVertex] == 0) bfs.push(incomingVertex);
+            }
+        }
+
+        sort(res.begin(), res.end());
+        return res;
+    }
+};
