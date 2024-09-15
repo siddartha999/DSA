@@ -3,7 +3,7 @@
 **/
 
 
-//Approach 1: BFS. TLE on leetcode (length of a word is much smaller than the size of wordList)
+//Approach 1: BFS. TLE on leetcode (length of a word is much smaller than the size of wordList). TC: O(N^2 * M). N: wordList length, M: length of a word
 //BFS is preferred to DFS as a level-by-level traversal determines the shorter path faster.
 class Solution {
 public:
@@ -68,7 +68,7 @@ public:
 
 
 
-// Approach 2: BFS.
+// Approach 2: BFS. TC: O(N * (M * 26)), SC: O(N * M). N: wordList length, M: length of a word
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
