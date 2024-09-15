@@ -4,6 +4,7 @@
 
 
 //Approach 1: BFS. TLE on leetcode (length of a word is much smaller than the size of wordList)
+//BFS is preferred to DFS as a level-by-level traversal determines the shorter path faster.
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
